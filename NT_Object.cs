@@ -30,7 +30,7 @@ namespace NT_CQMsg
 			{
 				case NT_Post_Type_E.message:
 					((NT_BaseAttribute_Message)_BaseAttribute).Initializer(_JsonData);
-					_Message_Data = JsonReader<NT_Message>.ReadObjectFormData(_BaseAttribute.message);
+					_Message_Data = JsonReader<NT_Message>.ReadObjectFormData(((NT_BaseAttribute_Message)_BaseAttribute).message);
 					break;
 				case NT_Post_Type_E.notice:
 					((NT_BaseAttribute_Notice)_BaseAttribute).Initializer(_JsonData);
