@@ -37,9 +37,15 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonReader.cs" />
+    <Compile Include="ListJson.cs" />
     <Compile Include="NT_BaseAttribute.cs" />
+    <Compile Include="NT_Message.cs" />
     <Compile Include="NT_Object.cs" />
     <Compile Include="NT_UID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
