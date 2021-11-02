@@ -12,9 +12,7 @@ namespace NT_CQMsg
 	{
 		public string _JsonData;
 		public NT_BaseAttribute _BaseAttribute;		
-		public NT_Message _Message_Data;
-		public NT_Object()
-		{ }
+		//public NT_Message _Message_Data;
 
 		public NT_Object(string _JsonData)
 		{
@@ -26,25 +24,30 @@ namespace NT_CQMsg
 		{
 			#region Initializer
 			_BaseAttribute = JsonReader<NT_BaseAttribute>.ReadObjectFormData(_JsonData);
-			switch (_BaseAttribute._Post_Type)
-			{
-				case NT_Post_Type_E.message:
-					((NT_BaseAttribute_Message)_BaseAttribute).Initializer(_JsonData);
-					_Message_Data = JsonReader<NT_Message>.ReadObjectFormData(((NT_BaseAttribute_Message)_BaseAttribute).message);
-					break;
-				case NT_Post_Type_E.notice:
-					((NT_BaseAttribute_Notice)_BaseAttribute).Initializer(_JsonData);
-					break;
-				case NT_Post_Type_E.request:
-					((NT_BaseAttribute_Request)_BaseAttribute).Initializer(_JsonData);
-					break;
-				case NT_Post_Type_E.meta_event:
-					((NT_BaseAttribute_Metaevent)_BaseAttribute).Initializer(_JsonData);
-					break;
-				default:
-					Console.WriteLine($"[NT_CQMsg Warring Message]Unknow message type.{_BaseAttribute.post_type}");
-					return;
-			}
+			_BaseAttribute.Initializer(this);
+			//switch (_BaseAttribute._Post_Type)
+			//{
+			//	case NT_BaseAttribute.NT_Post_Type_E.message:
+			//		NT_BaseAttribute_Message _NT_BaseAttribute_Message = _BaseAttribute as NT_BaseAttribute_Message;
+			//		_NT_BaseAttribute_Message = JsonReader<NT_BaseAttribute_Message>.ReadObjectFormData(_JsonData);
+			//		_NT_BaseAttribute_Message.Initializer();
+			//		break;
+			//	case NT_BaseAttribute.NT_Post_Type_E.notice:
+			//		NT_BaseAttribute_Notice _NT_BaseAttribute_Notice = _BaseAttribute as NT_BaseAttribute_Notice;
+			//		_NT_BaseAttribute_Notice = JsonReader<NT_BaseAttribute_Notice>.ReadObjectFormData(_JsonData);
+			//		break;
+			//	case NT_BaseAttribute.NT_Post_Type_E.request:
+			//		NT_BaseAttribute_Request _NT_BaseAttribute_Request = _BaseAttribute as NT_BaseAttribute_Request;
+			//		_NT_BaseAttribute_Request = JsonReader<NT_BaseAttribute_Request>.ReadObjectFormData(_JsonData);
+			//		break;
+			//	case NT_BaseAttribute.NT_Post_Type_E.meta_event:
+			//		NT_BaseAttribute_Metaevent _NT_BaseAttribute_Metaevent = _BaseAttribute as NT_BaseAttribute_Metaevent;
+			//		_NT_BaseAttribute_Metaevent = JsonReader<NT_BaseAttribute_Metaevent>.ReadObjectFormData(_JsonData);
+			//		break;
+			//	default:
+			//		Console.WriteLine("[NT_CQMsg Warring Message]Unknow message type." + _BaseAttribute.post_type);
+			//		return;
+			//}
 			#endregion
 		}
 	}

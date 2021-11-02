@@ -8,15 +8,10 @@ namespace NT_CQMsg
 	[Serializable]
 	public class NT_UID
 	{
-		public int user_id;
+		public long user_id;
 		public string nickname;
 		public string sex;
 		public int age;
-	}
-
-	[Serializable]
-	public class NT_UID_MoreInfo : NT_UID
-	{
 		public string card;
 		public string area;
 		public string level;
@@ -25,9 +20,9 @@ namespace NT_CQMsg
 	}
 
 	[Serializable]
-	public class NT_UID_Anonymous : NT_UID
+	public class NT_Anonymous 
 	{
-		public int id;
+		public long id;
 		public string name;
 		public string flag;
 	}
