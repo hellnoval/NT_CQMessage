@@ -9,7 +9,7 @@ namespace NT_CQMsg
 	public class NT_Message
 	{
 		public string type;
-		public NT_Message_Type_E _Type;
+		public NT_Message_Type_E _Type ;
 		public NT_Message_Data data;
 
 		/// <summary>
@@ -36,8 +36,44 @@ namespace NT_CQMsg
 			forward,
 			node,
 			xml,
-			json
+			json,
+			_Null = default
 		}
+
+		public virtual void Initializer(NT_Object _NT_Object = null)
+		{
+			if (type != string.Empty)
+			{
+				_Type = Enum.IsDefined(typeof(NT_Message_Type_E), type) ? (NT_Message_Type_E)Enum.Parse(typeof(NT_Message_Type_E), type) : NT_Message_Type_E._Null;
+			}
+
+			switch (_Type)
+			{
+				default:
+					UnityEngine.Debug.Log(_Type);
+					break;
+			}
+		}
+	}
+
+	[Serializable]
+	public class NT_Message_Data
+	{
+		public string text;
+		public string id;
+		public string file;
+		public string qq;
+		public string type;
+		public NT_Message_DataType_E _Type;
+		public string url;
+		public string title;
+		public string lat;
+		public string lon;
+		public string audio;
+		public long user_id;
+		public string nickname;
+		public NT_Message_Data[] content;
+		public string data;
 
 		/// <summary>
 		/// data数据类型
@@ -48,113 +84,32 @@ namespace NT_CQMsg
 			qq,
 			group,
 			///戳一戳
-			poke= 126,
-			music = 163			
+			poke = 126,
+			music = 163,
+			_Null = default
 		}
-	}
 
-	[Serializable]
-	public class NT_Message_Data : NT_Message
-	{
-	}
+		public void Initializer()
+		{
+			try
+			{
+				_Type = (NT_Message_DataType_E)int.Parse(type);
+			}
+			catch
+			{
+				if (type != string.Empty)
+				{
+					_Type = Enum.IsDefined(typeof(NT_Message_DataType_E), type) ? (NT_Message_DataType_E)Enum.Parse(typeof(NT_Message_DataType_E), type) : NT_Message_DataType_E._Null;
+				}
+			}
 
-	[Serializable]
-	public class NT_Message_Data_Text : NT_Message_Data
-	{		
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Face : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Image : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Record : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Video : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_At : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Rps : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Dice : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Shake : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Poke : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Anonymous : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Share : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Contact : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Location : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Music : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Reply : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Forward : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Node : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Xml : NT_Message_Data
-	{
-	}
-
-	[Serializable]
-	public class NT_Message_Data_Json : NT_Message_Data
-	{
+			if (content != null)
+			{
+				foreach (var v in content)
+				{
+					v.Initializer();
+				}
+			}
+		}
 	}
 }

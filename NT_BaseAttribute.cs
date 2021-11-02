@@ -52,7 +52,7 @@ namespace NT_CQMsg
 			/// <summary>
 			/// 未知事件
 			/// </summary>
-			_Null
+			_Null=default
 		}
 
 		public virtual void Initializer(NT_Object _NT_Object = null)
@@ -136,6 +136,17 @@ namespace NT_CQMsg
 		/// </summary>
 		public NT_UID sender;
 
+		#region 群消息时的数据
+		/// <summary>
+		/// 群号
+		/// </summary>
+		public long group_id;
+		/// <summary>
+		/// 匿名信息
+		/// </summary>
+		public NT_Anonymous anonymous;
+		#endregion
+
 		/// <summary>
 		/// 消息类型
 		/// </summary>
@@ -143,7 +154,7 @@ namespace NT_CQMsg
 		{
 			_private,
 			group,
-			_Null
+			_Null = default
 		}
 
 		/// <summary>
@@ -158,7 +169,7 @@ namespace NT_CQMsg
 			anonymous,
 			notice,
 			connect,
-			_Null
+			_Null = default
 		}
 
 		public override void Initializer(NT_Object _NT_Object = null)
@@ -185,41 +196,14 @@ namespace NT_CQMsg
 				}
 			}
 
-			switch (_Message_type)
+			if (message != null)
 			{
-				case NT_Message_Type_E.group:
-					NT_BaseAttribute_Message_Group _NT_BaseAttribute_Message_Group = this as NT_BaseAttribute_Message_Group;
-					_NT_BaseAttribute_Message_Group = JsonReader<NT_BaseAttribute_Message_Group>.ReadObjectFormData(_NT_Object._JsonData);
-					_NT_BaseAttribute_Message_Group.Initializer();
-					break;
-				default:
-					break;					
+				foreach (var v in message)
+				{
+					v.Initializer(_NT_Object);
+				}
 			}
 		}
-	}
-
-	/// <summary>
-	/// 私聊消息
-	/// </summary>
-	[Serializable]
-	public class NT_BaseAttribute_Message_Private : NT_BaseAttribute_Message
-	{
-	}
-
-	/// <summary>
-	/// 群消息
-	/// </summary>
-	[Serializable]
-	public class NT_BaseAttribute_Message_Group : NT_BaseAttribute_Message
-	{
-		/// <summary>
-		/// 群号
-		/// </summary>
-		public long group_id;
-		/// <summary>
-		/// 匿名信息
-		/// </summary>
-		public NT_Anonymous anonymous;
 	}
 	#endregion
 
