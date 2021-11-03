@@ -9,12 +9,19 @@ namespace NT_CQMsg
 	[Serializable]
 	public class NT_Message_Editer
 	{
+		/// <summary>
+		/// 提交的数据
+		/// </summary>
 		public NT_Message_Call _NT_Message_Call;
-		public NT_Message_CallBack _NT_Message_CallBack;
-
-		
+		/// <summary>
+		/// object类等待回调的数据，类型_NT_Message_Call中的_NT_Call_Type_E决定
+		/// </summary>
+		public NT_Message_CallBack _NT_Message_CallBack;		
 	}
 
+	/// <summary>
+	/// 定义的callback主类
+	/// </summary>
 	public class NT_Message_CallBack
 	{
 		#region 回调解析类
