@@ -239,6 +239,9 @@ namespace NT_CQMsg
 	[Serializable]
 	public class NT_BaseAttribute_Metaevent_Heartbeat : NT_BaseAttribute_Metaevent
 	{
+		/// <summary>
+		/// 到下次心跳的间隔，单位毫秒
+		/// </summary>
 		public int interval;
 		public NT_Heartbeat_Status status;
 

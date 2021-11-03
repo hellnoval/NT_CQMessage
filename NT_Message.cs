@@ -9,13 +9,13 @@ namespace NT_CQMsg
 	public class NT_Message
 	{
 		public string type;
-		public NT_Message_Type_E _Type ;
+		public NT_Message_Item_Type_E _Type ;
 		public NT_Message_Data data;
 
 		/// <summary>
 		/// 消息段基础类型
 		/// </summary>
-		public enum NT_Message_Type_E
+		public enum NT_Message_Item_Type_E
 		{
 			text,
 			face,
@@ -44,13 +44,13 @@ namespace NT_CQMsg
 		{
 			if (type != string.Empty)
 			{
-				_Type = Enum.IsDefined(typeof(NT_Message_Type_E), type) ? (NT_Message_Type_E)Enum.Parse(typeof(NT_Message_Type_E), type) : NT_Message_Type_E._Null;
+				_Type = Enum.IsDefined(typeof(NT_Message_Item_Type_E), type) ? (NT_Message_Item_Type_E)Enum.Parse(typeof(NT_Message_Item_Type_E), type) : NT_Message_Item_Type_E._Null;
 			}
 
 			switch (_Type)
 			{
 				default:
-					UnityEngine.Debug.Log(_Type);
+					UnityEngine.Debug.Log(_Type.ToString());
 					break;
 			}
 		}
